@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  CalculatorView.swift
 //  Calculator
 //
 //  Created by Anar on 13.02.2020.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CalculatorViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
