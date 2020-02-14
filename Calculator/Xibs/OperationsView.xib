@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OperationsViewController" customModule="Calculator" customModuleProvider="target">
+            <connections>
+                <outlet property="closeButton" destination="grb-8I-fDD" id="f2S-Oz-IsA"/>
+                <outlet property="operationsTableView" destination="gxs-ax-OQ0" id="YYv-PL-bt2"/>
+                <outlet property="view" destination="VIJ-6G-398" id="n0U-cr-tCI"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="VIJ-6G-398">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="400"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gxs-ax-OQ0">
+                    <rect key="frame" x="16" y="50" width="268" height="300"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="268" id="BCa-lC-8iB"/>
+                        <constraint firstAttribute="height" constant="300" id="yn1-qk-RNp"/>
+                    </constraints>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="grb-8I-fDD">
+                    <rect key="frame" x="248" y="6" width="46" height="30"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="closeButton:" destination="-1" eventType="touchUpInside" id="4eJ-v8-g93"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="gxs-ax-OQ0" firstAttribute="centerX" secondItem="VIJ-6G-398" secondAttribute="centerX" id="2aw-dr-6On"/>
+                <constraint firstItem="Uki-sJ-aXi" firstAttribute="trailing" secondItem="grb-8I-fDD" secondAttribute="trailing" constant="6" id="AQ4-Xr-l1e"/>
+                <constraint firstAttribute="top" secondItem="grb-8I-fDD" secondAttribute="top" constant="-6" id="KWh-CZ-Y5k"/>
+                <constraint firstItem="gxs-ax-OQ0" firstAttribute="centerY" secondItem="VIJ-6G-398" secondAttribute="centerY" id="lVe-8S-cBK"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="Uki-sJ-aXi"/>
+            <point key="canvasLocation" x="127.53623188405798" y="70.3125"/>
+        </view>
+    </objects>
+</document>
