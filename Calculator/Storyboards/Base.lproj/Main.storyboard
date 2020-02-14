@@ -53,15 +53,23 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iI8-R5-vCW">
+                                <rect key="frame" x="186" y="647" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="p6Q-GK-QQo" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="46" id="0Rj-Gu-9mx"/>
                             <constraint firstItem="RMk-He-yXa" firstAttribute="width" secondItem="S0x-HI-B06" secondAttribute="width" id="52r-ZM-w5N"/>
+                            <constraint firstItem="iI8-R5-vCW" firstAttribute="top" secondItem="S0x-HI-B06" secondAttribute="bottom" constant="14" id="6E1-9o-Gfh"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="S0x-HI-B06" secondAttribute="trailing" constant="27" id="Ch4-Ae-Aca"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="p6Q-GK-QQo" secondAttribute="trailing" constant="20" id="Wfo-aV-Xkp"/>
                             <constraint firstItem="Fg0-NF-98G" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="46" id="XNT-1d-Ubw"/>
                             <constraint firstItem="S0x-HI-B06" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="27" id="aRT-VE-JbH"/>
+                            <constraint firstItem="iI8-R5-vCW" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="eQg-m4-8Cw"/>
                             <constraint firstItem="S0x-HI-B06" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="5" id="fON-PA-0JN"/>
                             <constraint firstItem="Fg0-NF-98G" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="iUG-Xe-Pvw"/>
                             <constraint firstItem="S0x-HI-B06" firstAttribute="top" secondItem="RMk-He-yXa" secondAttribute="bottom" id="mHB-kM-DPW"/>
@@ -70,6 +78,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="alertInfoLabel" destination="iI8-R5-vCW" id="1M4-tL-m0r"/>
                         <outlet property="calculatorCollectionView" destination="S0x-HI-B06" id="5nb-fk-Vhe"/>
                         <outlet property="infoButton" destination="Fg0-NF-98G" id="FoD-Nd-XDG"/>
                         <outlet property="operationsButton" destination="p6Q-GK-QQo" id="dza-Rb-lwK"/>

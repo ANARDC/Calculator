@@ -6,7 +6,13 @@
 //  Copyright © 2020 Commodo. All rights reserved.
 //
 
+import Foundation
 import UIKit
+
+enum NumberPosition {
+  case first
+  case second
+}
 
 // MARK: - protocol
 
@@ -23,6 +29,10 @@ protocol CalculatorViewDelegate: class {
   func makeBlur()
   func makeInfoView()
   func makeOperationsView()
+  func makeAlertInfoLabel(data text: String)
+  func makeResultLabel(string: String)
+  func clearResultLabel()
+  func changeSignFor(number: NumberPosition, operation: String)
   
   func makeCalculatorCollectionView()
 }
@@ -46,6 +56,7 @@ final class CalculatorViewController: UIViewController, CalculatorViewDelegate {
   @IBOutlet weak var operationsButton         : UIButton!
   @IBOutlet weak var resultLabel              : UILabel!
   @IBOutlet weak var calculatorCollectionView : UICollectionView!
+  @IBOutlet weak var alertInfoLabel           : UILabel!
 }
 
 // MARK: - Life Cycle
@@ -105,10 +116,10 @@ extension CalculatorViewController {
   // MARK: - makeResultLabel
   func makeResultLabel() {
     self.resultLabel.textAlignment     = .right
-    self.resultLabel.layer.borderColor = UIColor(red      : 0, green      : 0, blue      : 0, alpha      : 0.2).cgColor
+    self.resultLabel.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2).cgColor
     self.resultLabel.layer.borderWidth = 1
-    self.resultLabel.font              = UIFont(name : "Futura-Medium", size : 30)
-    self.resultLabel.text              = "Result"
+    self.resultLabel.font              = UIFont(name: "Futura-Medium", size : 30)
+    self.resultLabel.text              = ""
   }
   
   // MARK: - makeBlur
@@ -143,6 +154,54 @@ extension CalculatorViewController {
                                                       y: self.view.center.y - 200,
                                                       width: 300,
                                                       height: 400)
+  }
+  
+  // MARK: - makeAlertInfoLabel
+  func makeAlertInfoLabel(data text: String) {
+    self.alertInfoLabel.text          = text
+    self.alertInfoLabel.numberOfLines = 0
+    self.alertInfoLabel.textAlignment = .center
+    self.alertInfoLabel.widthAnchor.constraint(equalToConstant: self.view.frame.width * 0.8).isActive = true
+  }
+  
+  // MARK: - makeResultLabel
+  func makeResultLabel(string: String) {
+    self.resultLabel.text! += string
+  }
+  
+  // MARK: - clearResultLabel
+  func clearResultLabel() {
+    self.resultLabel.text = ""
+  }
+  
+  // MARK: - changeSignFor
+  func changeSignFor(number: NumberPosition, operation: String) {
+    let operation = operation.filter({ ["+", "−", "×", "÷"].contains($0) })
+    let numbers   = operation.components(separatedBy: ["+", "−", "×", "÷"])
+    var result    = ""
+    
+    switch number {
+    case .first:
+      if numbers[0].contains("-") {
+        let index = numbers[0].index(numbers[0].startIndex, offsetBy: 1)
+        let firstNumber = numbers[0][index...]
+        result = String(firstNumber)
+      } else {
+        let firstNumber = numbers[0]
+        result = "-" + String(firstNumber)
+      }
+    case .second:
+      if numbers[1].contains("-") {
+        let index = numbers[1].index(numbers[1].startIndex, offsetBy: 1)
+        let secondNumber = numbers[1][index...]
+        result = numbers[0] + operation + String(secondNumber)
+      } else {
+        let secondNumber = numbers[1]
+        result = numbers[0] + operation + "-" + String(secondNumber)
+      }
+    }
+    
+    self.resultLabel.text = result
   }
 }
 
@@ -197,7 +256,7 @@ extension CalculatorViewController: UICollectionViewDelegate {
   
   // MARK: - didSelectItemAt
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    // TODO: Обработать нажатия
+    self.presenter.didSelectItemAt(rowIndex: indexPath.row)
   }
 }
 
@@ -216,6 +275,8 @@ extension CalculatorViewController: UICollectionViewDelegateFlowLayout {
     }
   }
 }
+
+// MARK: - CustomIntensityVisualEffectView
 
 final class CustomIntensityVisualEffectView: UIVisualEffectView {
   /**

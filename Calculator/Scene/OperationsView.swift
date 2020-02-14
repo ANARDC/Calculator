@@ -13,7 +13,7 @@ import UIKit
 protocol OperationsViewDelegate: UIViewController {
   var presenter: CalculatorOperationsViewPresenterDelegate! { get set }
   
-  func setOperationsData(data operationsData: [String])
+  func setOperationsData(data operationsData: [String?])
   
   func makeView()
   func makeCloseButton()
@@ -30,7 +30,7 @@ final class OperationsViewController: UIViewController, OperationsViewDelegate {
   
   let cellID = "cellID"
   
-  var operationsData: [String]!
+  var operationsData: [String?] = [nil]
   
   @IBOutlet weak var operationsTableView: UITableView!
   @IBOutlet weak var closeButton: UIButton!
@@ -74,7 +74,7 @@ extension OperationsViewController {
 extension OperationsViewController {
   
   // MARK: - setOperationsData
-  func setOperationsData(data operationsData: [String]) {
+  func setOperationsData(data operationsData: [String?]) {
     self.operationsData = operationsData
   }
 }
