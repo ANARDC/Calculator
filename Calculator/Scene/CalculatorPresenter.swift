@@ -12,13 +12,11 @@ import Foundation
 
 protocol CalculatorPresenterGeneralProtocol: CalculatorPresenterDelegate, CalculatorInfoViewPresenterDelegate, CalculatorOperationsViewPresenterDelegate, CalculatorCollectionViewCellPresenterDelegate {
   // Тут мы можем создавать общие для всех презентеров свойства и методы
-  var calculatorViewInteractor : CalculatorInteractorDelegate! { get set }
-  var infoViewInteractor       : CalculatorInfoViewInteractorDelegate! { get set }
-  var operationsViewInteractor : CalculatorOperationsViewInteractorDelegate! { get set }
 }
 
 protocol CalculatorPresenterDelegate: class {
-  var computingFactory : ComputingFactoryDelegate! { get set }
+  var calculatorViewInteractor : CalculatorInteractorDelegate! { get set }
+  var computingFactory         : ComputingFactoryDelegate! { get set }
   
   func viewDidLoad()
   
@@ -28,12 +26,14 @@ protocol CalculatorPresenterDelegate: class {
 }
 
 protocol CalculatorInfoViewPresenterDelegate: class {
+  var infoViewInteractor: CalculatorInfoViewInteractorDelegate! { get set }
   func infoViewDidLoad()
   
   func infoViewCloseButton()
 }
 
 protocol CalculatorOperationsViewPresenterDelegate: class {
+  var operationsViewInteractor: CalculatorOperationsViewInteractorDelegate! { get set }
   func operationsViewDidLoad()
   
   func operationsViewCloseButton()
@@ -187,6 +187,8 @@ extension CalculatorPresenter: CalculatorOperationsViewPresenterDelegate {
 // MARK: - CalculatorCollectionViewCellPresenterDelegate
 
 extension CalculatorPresenter: CalculatorCollectionViewCellPresenterDelegate {
+  
+  // MARK: - Life Cycle
   func cellViewDidLoad() {
     self.currentCell.makeCell()
     self.currentCell.makeCellLabel()

@@ -24,9 +24,9 @@ final class CalculatorConfigurator: CalculatorConfiguratorDelegate {
   let infoView            : InfoViewDelegate!
   let operationsView      : OperationsViewDelegate!
   
-  let presenter        : CalculatorPresenterGeneralProtocol!
-  let computingFactory : ComputingFactoryDelegate!
-  let interactor       : CalculatorInteractorGeneralProtocol!
+  let presenter        : CalculatorPresenterGeneralProtocol
+  let interactor       : CalculatorInteractorGeneralProtocol
+  let computingFactory : ComputingFactoryDelegate
   
   init(_ calculatorViewController: CalculatorViewDelegate) {
     self.infoView       = InfoViewController(nibName: "InfoView", bundle: nil)
@@ -62,6 +62,7 @@ final class CalculatorConfigurator: CalculatorConfiguratorDelegate {
     self.presenter.operationsViewInteractor = self.interactor
   }
   
+  // MARK: - configure
   func configure(_ calculatorCollectionViewCell: CalculatorCollectionViewCellDelegate) {
     self.presenter.currentCell = calculatorCollectionViewCell
     calculatorCollectionViewCell.presenter = self.presenter
