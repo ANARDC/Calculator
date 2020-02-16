@@ -9,11 +9,6 @@
 import Foundation
 import UIKit
 
-enum NumberPosition {
-  case first
-  case second
-}
-
 // MARK: - protocol
 
 protocol CalculatorViewDelegate: class {
@@ -32,7 +27,6 @@ protocol CalculatorViewDelegate: class {
   func makeAlertInfoLabel(data text: String)
   func makeResultLabel(string: String)
   func clearResultLabel()
-  func changeSignFor(number: NumberPosition, operation: String)
   
   func makeCalculatorCollectionView()
 }
@@ -172,36 +166,6 @@ extension CalculatorViewController {
   // MARK: - clearResultLabel
   func clearResultLabel() {
     self.resultLabel.text = ""
-  }
-  
-  // MARK: - changeSignFor
-  func changeSignFor(number: NumberPosition, operation: String) {
-    let operation = operation.filter({ ["+", "−", "×", "÷"].contains($0) })
-    let numbers   = operation.components(separatedBy: ["+", "−", "×", "÷"])
-    var result    = ""
-    
-    switch number {
-    case .first:
-      if numbers[0].contains("-") {
-        let index = numbers[0].index(numbers[0].startIndex, offsetBy: 1)
-        let firstNumber = numbers[0][index...]
-        result = String(firstNumber)
-      } else {
-        let firstNumber = numbers[0]
-        result = "-" + String(firstNumber)
-      }
-    case .second:
-      if numbers[1].contains("-") {
-        let index = numbers[1].index(numbers[1].startIndex, offsetBy: 1)
-        let secondNumber = numbers[1][index...]
-        result = numbers[0] + operation + String(secondNumber)
-      } else {
-        let secondNumber = numbers[1]
-        result = numbers[0] + operation + "-" + String(secondNumber)
-      }
-    }
-    
-    self.resultLabel.text = result
   }
 }
 
