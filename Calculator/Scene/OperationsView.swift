@@ -8,39 +8,19 @@
 
 import UIKit
 
-// MARK: - protocol
-
-protocol OperationsViewDelegate: UIViewController {
-  var presenter: CalculatorOperationsViewPresenterDelegate! { get set }
-  
-  func setOperationsData(data operationsData: [String?])
-  
-  func makeView()
-  func makeCloseButton()
-  
-  func makeOperationsTableView()
-}
-
-// MARK: - class
-
-final class OperationsViewController: UIViewController, OperationsViewDelegate {
-  
-  // MARK: - properties
-  var presenter  : CalculatorOperationsViewPresenterDelegate!
+final class OperationsViewController: UIViewController, OperationsViewProtocol {
+  var presenter: CalculatorOperationsViewPresenterProtocol!
   
   let cellID = "cellID"
   
   var operationsData: [String?] = [nil]
   
-  @IBOutlet weak var operationsTableView: UITableView!
-  @IBOutlet weak var closeButton: UIButton!
+  @IBOutlet weak var operationsTableView : UITableView!
+  @IBOutlet weak var closeButton         : UIButton!
 }
 
 // MARK: - Life Cycle
-
 extension OperationsViewController {
-  
-  // MARK: - viewDidLoad
   override func viewDidLoad() {
     super.viewDidLoad()
     self.presenter.operationsViewDidLoad()
@@ -48,20 +28,14 @@ extension OperationsViewController {
 }
 
 // MARK: - Action
-
 extension OperationsViewController {
-  
-  // MARK: - closeButton
   @IBAction func closeButton(_ sender: UIButton) {
     self.presenter.operationsViewCloseButton()
   }
 }
 
 // MARK: - UITableView
-
 extension OperationsViewController {
-  
-  // MARK: - makeOperationsTableView
   func makeOperationsTableView() {
     self.operationsTableView.delegate   = self
     self.operationsTableView.dataSource = self
@@ -80,15 +54,11 @@ extension OperationsViewController {
 }
 
 // MARK: - UI Making
-
 extension OperationsViewController {
-  
-  // MARK: - makeView
   func makeView() {
     self.view.layer.cornerRadius = self.closeButton.frame.height / 2
   }
   
-  // MARK: - makeCloseButton
   func makeCloseButton() {
     self.closeButton.layer.cornerRadius = self.closeButton.frame.height / 2
     self.closeButton.backgroundColor    = #colorLiteral(red: 0.714621114, green: 0.1241069765, blue: 0.0462721673, alpha: 1)
@@ -100,15 +70,11 @@ extension OperationsViewController {
 }
 
 // MARK: - UICollectionViewDataSource
-
 extension OperationsViewController: UITableViewDataSource {
-  
-  // MARK: - numberOfRowsInSection
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     self.operationsData.count
   }
   
-  // MARK: - cellForRowAt
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: self.cellID, for: indexPath)
     cell.textLabel?.text = self.operationsData[indexPath.row]
@@ -117,11 +83,6 @@ extension OperationsViewController: UITableViewDataSource {
 }
 
 // MARK: - UITableViewDelegate
-
 extension OperationsViewController: UITableViewDelegate {
-  
-  // MARK: - heightForRowAt
-  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    50
-  }
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { 50 }
 }

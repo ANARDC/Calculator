@@ -6,22 +6,7 @@
 //  Copyright © 2020 Commodo. All rights reserved.
 //
 
-//import Foundation
-
-// MARK: - protocol
-
-protocol ComputingFactoryDelegate {
-  var presenter : CalculatorPresenterGeneralProtocol! { get set }
-  
-  func compute(firstNumber: Float, secondNumber: Float, operation: Operation) -> Float
-  func percent(number: Float) -> Float
-}
-
-// MARK: - class
-
-final class ComputingFactory: ComputingFactoryDelegate {
-  
-  // MARK: - properties
+final class ComputingFactory: ComputingFactoryProtocol {
   weak var presenter : CalculatorPresenterGeneralProtocol!
   
   init(_ presenter: CalculatorPresenterGeneralProtocol) {
@@ -30,10 +15,10 @@ final class ComputingFactory: ComputingFactoryDelegate {
   
   func compute(firstNumber: Float, secondNumber: Float, operation: Operation) -> Float {
     switch operation {
-    case .addition: return firstNumber + secondNumber
-    case .subtraction: return firstNumber - secondNumber
-    case .multiplication: return firstNumber * secondNumber
-    case .division: return firstNumber / secondNumber
+      case .addition: return firstNumber + secondNumber
+      case .subtraction: return firstNumber - secondNumber
+      case .multiplication: return firstNumber * secondNumber
+      case .division: return firstNumber / secondNumber
     }
   }
   

@@ -9,48 +9,16 @@
 import UIKit
 import CoreData
 
-// MARK: - protocols
-
-protocol CalculatorInteractorGeneralProtocol: CalculatorInteractorDelegate, CalculatorInfoViewInteractorDelegate, CalculatorOperationsViewInteractorDelegate {
-  // Тут мы можем создавать общие для всех интеракторов свойства и методы
-}
-
-protocol CalculatorInteractorDelegate {
-  var calculatorViewPresenter: CalculatorPresenterDelegate! { get set }
-  
-  func saveOperationData(data operationData: String)
-  func getAlertInfoText() -> String
-}
-
-protocol CalculatorInfoViewInteractorDelegate {
-  var infoViewPresenter: CalculatorInfoViewPresenterDelegate! { get set }
-  
-  func getInfoText() -> String
-}
-
-protocol CalculatorOperationsViewInteractorDelegate {
-  var operationsViewPresenter: CalculatorOperationsViewPresenterDelegate! { get set }
-  
-  func getOperationsData() -> [String?]
-}
-
-// MARK: - class
-
 final class CalculatorInteractor: CalculatorInteractorGeneralProtocol {
+  weak var calculatorViewPresenter : CalculatorPresenterProtocol!
+  weak var infoViewPresenter       : CalculatorInfoViewPresenterProtocol!
+  weak var operationsViewPresenter : CalculatorOperationsViewPresenterProtocol!
   
-  // MARK: - properties
-  weak var calculatorViewPresenter : CalculatorPresenterDelegate!
-  weak var infoViewPresenter       : CalculatorInfoViewPresenterDelegate!
-  weak var operationsViewPresenter : CalculatorOperationsViewPresenterDelegate!
-
   let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 }
 
-// MARK: - CalculatorInteractorDelegate
-
-extension CalculatorInteractor: CalculatorInteractorDelegate {
-  
-  // MARK: - saveOperationData
+// MARK: - CalculatorInteractorProtocol
+extension CalculatorInteractor: CalculatorInteractorProtocol {
   func saveOperationData(data operationData: String) {
     // Получаем необходимые свойства
     let entity        = NSEntityDescription.entity(forEntityName: "OperationData", in: self.context)
@@ -67,27 +35,20 @@ extension CalculatorInteractor: CalculatorInteractorDelegate {
     }
   }
   
-  // MARK: - getAlertInfoText
   func getAlertInfoText() -> String {
     return "Случаи некорректного ввода не обработаны, будьте бдительны"
   }
 }
 
-// MARK: - CalculatorInteractorDelegate
-
-extension CalculatorInteractor: CalculatorInfoViewInteractorDelegate {
-  
-  // MARK: - getInfoText
+// MARK: - CalculatorInfoViewInteractorProtocol
+extension CalculatorInteractor: CalculatorInfoViewInteractorProtocol {
   func getInfoText() -> String {
     "Это приложение сделано на коленке за пол дня специально для демонстрации моей любимой архитектуры и чтобы я мог показать хоть кому-то ту штуку с протоколами, которую я придумал. По всем вопросам Telegram: @AR_DC"
   }
 }
 
-// MARK: - CalculatorOperationsViewInteractorDelegate
-
-extension CalculatorInteractor: CalculatorOperationsViewInteractorDelegate {
-  
-  // MARK: - getOperationsData
+// MARK: - CalculatorOperationsViewInteractorProtocol
+extension CalculatorInteractor: CalculatorOperationsViewInteractorProtocol {
   func getOperationsData() -> [String?] {
     
     var operationsData = [String?]()
@@ -104,7 +65,5 @@ extension CalculatorInteractor: CalculatorOperationsViewInteractorDelegate {
     }
     
     return operationsData
-    
-//    return ["1+2=3", "2*6=12", "3,4*5,2=17,68", "30/7=4,28"]
   }
 }

@@ -6,29 +6,16 @@
 //  Copyright © 2020 Commodo. All rights reserved.
 //
 
-// MARK: - protocol
-
-protocol CalculatorConfiguratorDelegate {
-  func configure(_ calculatorViewController: CalculatorViewDelegate)
-  func configure(_ infoViewController: InfoViewDelegate)
-  func configure(_ operationsViewController: OperationsViewDelegate)
-  func configure(_ calculatorCollectionViewCell: CalculatorCollectionViewCellDelegate)
-}
-
-// MARK: - class
-
-final class CalculatorConfigurator: CalculatorConfiguratorDelegate {
-  
-  // MARK: - properties
-  weak var calculatorView : CalculatorViewDelegate!
-  let infoView            : InfoViewDelegate!
-  let operationsView      : OperationsViewDelegate!
+final class CalculatorConfigurator: CalculatorConfiguratorProtocol {
+  weak var calculatorView : CalculatorViewProtocol!
+  let infoView            : InfoViewProtocol!
+  let operationsView      : OperationsViewProtocol!
   
   let presenter        : CalculatorPresenterGeneralProtocol
   let interactor       : CalculatorInteractorGeneralProtocol
-  let computingFactory : ComputingFactoryDelegate
+  let computingFactory : ComputingFactoryProtocol
   
-  init(_ calculatorViewController: CalculatorViewDelegate) {
+  init(_ calculatorViewController: CalculatorViewProtocol) {
     self.infoView       = InfoViewController(nibName: "InfoView", bundle: nil)
     self.operationsView = OperationsViewController(nibName: "OperationsView", bundle: nil)
     
@@ -40,9 +27,8 @@ final class CalculatorConfigurator: CalculatorConfiguratorDelegate {
     self.presenter.computingFactory = self.computingFactory
   }
   
-  // MARK: - configure
   // Типом параметров являются протокоы специально для защиты от отсутствия инициализации конфигуратора
-  func configure(_ calculatorViewController: CalculatorViewDelegate) {
+  func configure(_ calculatorViewController: CalculatorViewProtocol) {
     calculatorViewController.presenter      = self.presenter
     self.presenter.calculatorViewInteractor = self.interactor
     
@@ -50,20 +36,17 @@ final class CalculatorConfigurator: CalculatorConfiguratorDelegate {
     calculatorViewController.operationsViewController = self.operationsView
   }
   
-  // MARK: - configure
-  func configure(_ infoViewController: InfoViewDelegate) {
+  func configure(_ infoViewController: InfoViewProtocol) {
     infoViewController.presenter      = self.presenter
     self.presenter.infoViewInteractor = self.interactor
   }
   
-  // MARK: - configure
-  func configure(_ operationsViewController: OperationsViewDelegate) {
+  func configure(_ operationsViewController: OperationsViewProtocol) {
     operationsViewController.presenter      = self.presenter
     self.presenter.operationsViewInteractor = self.interactor
   }
   
-  // MARK: - configure
-  func configure(_ calculatorCollectionViewCell: CalculatorCollectionViewCellDelegate) {
+  func configure(_ calculatorCollectionViewCell: CalculatorCollectionViewCellProtocol) {
     self.presenter.currentCell = calculatorCollectionViewCell
     calculatorCollectionViewCell.presenter = self.presenter
   }

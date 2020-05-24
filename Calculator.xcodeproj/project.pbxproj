@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9966B9F1247AE02B00A46D7D /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9966B9F0247AE02B00A46D7D /* Protocols.swift */; };
 		99A7A01F23F5A30D0054DC01 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A7A01E23F5A30D0054DC01 /* AppDelegate.swift */; };
 		99A7A02123F5A30D0054DC01 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A7A02023F5A30D0054DC01 /* SceneDelegate.swift */; };
 		99A7A02323F5A30D0054DC01 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A7A02223F5A30D0054DC01 /* CalculatorView.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9966B9F0247AE02B00A46D7D /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		99A7A01B23F5A30D0054DC01 /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99A7A01E23F5A30D0054DC01 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		99A7A02023F5A30D0054DC01 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				99A7A03A23F5A9FA0054DC01 /* CalculatorInteractor.swift */,
 				99A7A03E23F5B4D80054DC01 /* ComputingFactory.swift */,
 				99A7A03C23F5AA210054DC01 /* CalculatorConfigurator.swift */,
+				9966B9F0247AE02B00A46D7D /* Protocols.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -205,6 +208,7 @@
 				99A7A02323F5A30D0054DC01 /* CalculatorView.swift in Sources */,
 				99A7A03923F5A9E90054DC01 /* CalculatorPresenter.swift in Sources */,
 				99A7A02923F5A30D0054DC01 /* Calculator.xcdatamodeld in Sources */,
+				9966B9F1247AE02B00A46D7D /* Protocols.swift in Sources */,
 				99A7A01F23F5A30D0054DC01 /* AppDelegate.swift in Sources */,
 				99A7A03D23F5AA210054DC01 /* CalculatorConfigurator.swift in Sources */,
 				99A7A03B23F5A9FA0054DC01 /* CalculatorInteractor.swift in Sources */,
